@@ -60,30 +60,57 @@ function playRound(playerSelection,computerSelection) {
     }
 }
 
-function game() {
-
-    let userPoints = 0, computerPoints = 0;
-
-    //play 5 rounds
-    for (let i = 0; i < 5; i++) {
-       
-        let userMove = prompt("Rock, Paper or Scissors");
-
-        let computerMove = computerPlay();
-
-        let result = playRound(userMove, computerMove);
-
-        if (result.startsWith("You Win")) {
-                
-            userPoints++;
-        }
-        else if (result.startsWith("You Lose")) {
-            computerPoints++; 
-        }
-
-        console.log(result
-                +`\nYou have ${userPoints} Points!\n`
-                 +  `The Computer has ${computerPoints}!\n`);
+function runRound(userMove) {
+    let roundResult = playRound(userMove, computerPlay());
     
+    updatePoints(roundResult);
+
+    resultDiv.textContent = roundResult + `You have ${userPoints} points.\n`
+        + `The Computer has ${computerPoints} points.`
+}
+
+function updatePoints(roundResult) {
+    if (roundResult.startsWith('You Win')) {
+        userPoints++;        
+    }
+    else if (roundResult.startsWith('You Lose')) {
+        computerPoints++;
+    }
+    if (userPoints === 5 || computerPoints === 5) {
+       gameEnd(); 
     }
 }
+
+function gameEnd() {
+     let buttons = document.querySelectorAll('button');
+     buttons.forEach(button => body.removeChild(button));
+ 
+    //user won
+    if (userPoints === 5) {
+        resultDiv.textContent = 'Congratulations! You were able to outsmart'
+            + ' a Computer';
+   }
+    
+    //user lost
+    else {
+        resultDiv.textContent = "I'm sorry but you have lost the game.\n"
+            + "Keep trying!";
+    }
+}
+
+//select button and result div
+const rockButton = document.getElementById('rockButton');
+const paperButton = document.getElementById('paperButton');
+const scissorsButton = document.getElementById('scissorsButton');
+const resultDiv = document.getElementById('result');
+const body = document.querySelector('body');
+
+let userPoints = 0;
+let computerPoints = 0;
+
+//add event listeners to play round with corresponding values
+rockButton.addEventListener('click', () => runRound('rock'));
+paperButton.addEventListener('click', () => runRound('paper'));
+scissorsButton.addEventListener('click', () => runRound('scissors'));
+
+
