@@ -59,25 +59,33 @@ function playRound(playerSelection,computerSelection) {
         }
     }
 }
-
 function runRound(userMove) {
+    //run a round of the game
     let roundResult = playRound(userMove, computerPlay());
     
+    //update user and computer scores depending on result
     updatePoints(roundResult);
 
+    //update div text content
     resultDiv.textContent = roundResult + `You have ${userPoints} points.\n`
         + `The Computer has ${computerPoints} points.`
 }
 
 function updatePoints(roundResult) {
+
+    //add a point to the winner of the round
+    //if no one won, no points given
+
     if (roundResult.startsWith('You Win')) {
         userPoints++;        
     }
     else if (roundResult.startsWith('You Lose')) {
         computerPoints++;
     }
+
+    //if someone reaches 5 points, game over
     if (userPoints === 5 || computerPoints === 5) {
-       gameEnd(); 
+      gameEnd(); 
     }
 }
 
