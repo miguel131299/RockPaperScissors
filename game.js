@@ -66,9 +66,11 @@ function runRound(userMove) {
     //update user and computer scores depending on result
     updatePoints(roundResult);
 
-    //update div text content
-    resultDiv.textContent = roundResult + `You have ${userPoints} points.\n`
+   if (! gameOver) {
+       //update div text content
+        resultDiv.textContent = roundResult + `\nYou have ${userPoints} points.\n`
         + `The Computer has ${computerPoints} points.`
+   } 
 }
 
 function updatePoints(roundResult) {
@@ -91,7 +93,8 @@ function updatePoints(roundResult) {
 
 function gameEnd() {
      let buttons = document.querySelectorAll('button');
-     buttons.forEach(button => body.removeChild(button));
+     buttons.forEach(button => buttonContainer.removeChild(button));
+     gameOver = true;
  
     //user won
     if (userPoints === 5) {
@@ -111,11 +114,12 @@ const rockButton = document.getElementById('rockButton');
 const paperButton = document.getElementById('paperButton');
 const scissorsButton = document.getElementById('scissorsButton');
 const resultDiv = document.getElementById('result');
-const body = document.querySelector('body');
+const buttonContainer = document.getElementById('button-container');
 
 let userPoints = 0;
 let computerPoints = 0;
 
+let gameOver = false;
 //add event listeners to play round with corresponding values
 rockButton.addEventListener('click', () => runRound('rock'));
 paperButton.addEventListener('click', () => runRound('paper'));
