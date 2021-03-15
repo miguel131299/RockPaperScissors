@@ -27,35 +27,35 @@ function playRound(playerSelection,computerSelection) {
             return("It's a tie!");
         }
         else if(computerSelection === "paper") {
-            return("You Lose! Paper beats Rock");
+            return("You Lose! Paper beats Rock.");
         }
         else {
-            return("You Win! Rock beats Scissors");
+            return("You Win! Rock beats Scissors.");
         }
     }
 
     else if (playerSelection === "paper") {
         
         if(computerSelection === "rock") {
-            return("You Win! Paper beats Rock");
+            return("You Win! Paper beats Rock.");
         }
         else if(computerSelection === "paper") {
             return("It's a tie!");
         }
         else {
-            return("You Lose! Scissors beat paper");
+            return("You Lose! Scissors beat Paper.");
         }
     }        
     else {
        
         if(computerSelection === "rock") {
-            return("You Lose! Rock beats Scissors");
+            return("You Lose! Rock beats Scissors.");
         }
         else if(computerSelection === "paper") {
-            return("You Win! Scissors beat paper");
+            return("You Win! Scissors beat Paper.");
         }
         else {
-            return("It's a tie");
+            return("It's a tie!");
         }
     }
 }
@@ -124,5 +124,4 @@ let gameOver = false;
 rockButton.addEventListener('click', () => runRound('rock'));
 paperButton.addEventListener('click', () => runRound('paper'));
 scissorsButton.addEventListener('click', () => runRound('scissors'));
-
 
